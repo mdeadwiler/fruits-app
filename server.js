@@ -21,6 +21,16 @@ const Fruit = require("./models/fruit.js");
 app.get("/", async (req, res) => {
     res.render("index.ejs");
   });
+  // server.js
+
+// GET /fruits/new
+// server.js
+
+// GET /fruits/new
+app.get("/fruits/new", (req, res) => {
+    res.render("fruits/new.ejs");
+  });
+  
   
 
 app.listen(3000, () => {
