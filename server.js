@@ -5,8 +5,9 @@ dotenv.config();
 //require(dotenv).config();
 const mongoose = require("mongoose"); //require package
 const express = require("express");
-
 const app = express();
+app.use(express.urlencoded({ extended: false }));// You don't need it!!! This allows form data and converting it to a javaScript language after submission
+
 
 // Connect to MongoDB using the connection string in the .env file
 mongoose.connect(process.env.MONGODB_URI);
@@ -29,6 +30,19 @@ app.get("/", async (req, res) => {
 // GET /fruits/new
 app.get("/fruits/new", (req, res) => {
     res.render("fruits/new.ejs");
+  });
+  
+  // server.js
+
+// POST /fruits
+app.post("/fruits", async (req, res) => {
+    if(req.body.isReadyToEat === "on") {
+req.body.isReadyToEat = true;
+    } else {
+        req.body.isReadyToEat = false;
+    }
+    await Fruit.create(req.body);
+    res.redirect("/fruits/new");
   });
   
   
