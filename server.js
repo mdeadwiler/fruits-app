@@ -65,6 +65,10 @@ app.post("/fruits", async (req, res) => {
     res.redirect("/fruits"); // redirect to index fruits
   });
   
+  app.get("/fruits/:fruitId", async (req, res) => {
+    const foundFruit = await Fruit.findById(req.params.fruitId);
+    res.render("fruits/show.ejs", { fruit: foundFruit });
+  });
   
 
 app.listen(3000, () => {
